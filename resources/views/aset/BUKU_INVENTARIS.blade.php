@@ -41,6 +41,7 @@
         td {
             border: 1px solid #dddddd;
             text-align: center;
+            vertical-align: top;
             padding: 4px;
             word-wrap: break-word;
             word-break: break-all;
