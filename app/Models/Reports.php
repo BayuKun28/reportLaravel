@@ -55,7 +55,7 @@ class Reports extends Model
                 return $result;
             }
         } catch (\Exception $e) {
-            echo "Cek Penulisan Parameter! ";
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
             die();
         }
     }
@@ -99,7 +99,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            echo "Cek Penulisan Parameter! ";
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
             die();
         }
     }
@@ -161,7 +161,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            echo "Cek Penulisan Parameter! ";
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
             die();
         }
     }
@@ -232,7 +232,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            echo "Cek Penulisan Parameter! ";
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
             die();
         }
     }
@@ -300,7 +300,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            echo "Cek Penulisan Parameter! ";
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
             die();
         }
     }
@@ -368,7 +368,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            echo "Cek Penulisan Parameter! ";
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
             die();
         }
     }
@@ -437,7 +437,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            echo "Cek Penulisan Parameter! ";
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
             die();
         }
     }
@@ -506,7 +506,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            echo "Cek Penulisan Parameter! ";
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
             die();
         }
     }
@@ -597,7 +597,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            echo "Cek Penulisan Parameter! ";
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
             die();
         }
     }
@@ -667,7 +667,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            echo "Cek Penulisan Parameter! ";
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
             die();
         }
     }
@@ -730,7 +730,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            echo "Cek Penulisan Parameter! ";
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
             die();
         }
     }
