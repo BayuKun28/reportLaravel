@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAPORAN INVENTARIS RUANG</title>
+    <title>KARTU INVENTARIS BARANG (KIB) C</title>
     <style>
         body {
             font-family: sans-serif;
@@ -75,7 +75,8 @@
 
 <body>
     <center>
-        <h3>LAPORAN INVENTARIS RUANG</h3>
+        <h3>KARTU INVENTARIS BARANG (KIB) C</h3>
+        <h3>GEDUNG DAN BANGUNAN</h3>
         <h4>TAHUN ANGGARAN {{ $tahun }}</h4>
     </center>
     <table class="no-border">
@@ -104,52 +105,33 @@
         <thead>
             <tr>
                 <th rowspan="2" style="width: 3%">No</th>
+                <th rowspan="2">Kode OPD</th>
+                <th rowspan="2">Nama OPD</th>
                 <th rowspan="2">Jenis Barang/ Nama Barang</th>
-                <th rowspan="2">Merek/ Model</th>
-                <th rowspan="2">No.
-                    Seri
-                    Pabrik
-                </th>
-                <th rowspan="2">No. Rangka
-                </th>
-                <th rowspan="2">No.
-                    Mesin
-                </th>
-                <th rowspan="2">No. BPKB
-                </th>
-                <th rowspan="2">No.
-                    Polisi
-                </th>
-                <th rowspan="2">Ukuran
-                </th>
-                <th rowspan="2">Bahan
-                </th>
-                <th rowspan="2">Judul
-                </th>
-                <th rowspan="2">Tahun
-                    Pembuatan/
-                    Pembelian
-                </th>
-                <th rowspan="2">No. Kode Barang
-                </th>
-                <th rowspan="2">Harga Beli/
-                    Perolehan
-                </th>
-                <th colspan="3">Keadaan Barang
-                </th>
-                <th rowspan="2">Keterangan Mutasi dll
-                </th>
-                <th rowspan="2">Kodekib
-                </th>
+                <th colspan="2">Nomor</th>
+                <th rowspan="2">Kondisi Bangunan (B,KB,RB)</th>
+                <th colspan="2">Kontruksi Bangunan</th>
+                <th rowspan="2">Luas Lantai (M2)</th>
+                <th rowspan="2">Letak/ Lokasi Alamat </th>
+                <th colspan="2">Dokumen Gedung</th>
+                <th rowspan="2">Luas (M2)</th>
+                <th rowspan="2">Status Tanah</th>
+                <th rowspan="2">Nomer Kode Tanah</th>
+                <th rowspan="2">Tahun Perolehan</th>
+                <th rowspan="2">Asal Usul</th>
+                <th rowspan="2">Klasifikasi</th>
+                <th rowspan="2">Harga (Rp)</th>
+                <th rowspan="2">Deskripsi Barang</th>
+                <th rowspan="2">Ket</th>
+                <th rowspan="2">Qrcode</th>
             </tr>
             <tr>
-                <th>Baik
-                    (B)
-                </th>
-                <th>Kurang Baik (KB)
-                </th>
-                <th>Rusak Berat (RB)
-                </th>
+                <th>Kode Barang</th>
+                <th>Register</th>
+                <th>Bertingkat Tidak</th>
+                <th>Beton Tidak</th>
+                <th>Tanggal</th>
+                <th>Nomor</th>
             </tr>
         </thead>
         <tbody>
@@ -160,24 +142,28 @@
             @foreach ($data as $item)
                 <tr>
                     <td>{{ $i++ }}</td>
+                    <td>{{ $item->kodeopd }}</td>
+                    <td style="text-align: left;">{{ $item->uraiorganisasi }}</td>
                     <td>{{ $item->uraibarang }}</td>
-                    <td>{{ $item->merktype }}</td>
-                    <td>{{ $item->nopabrik }}</td>
-                    <td>{{ $item->norangka }}</td>
-                    <td>{{ $item->nomesin }}</td>
-                    <td>{{ $item->nobpkb }}</td>
-                    <td>{{ $item->nopolisi }}</td>
-                    <td>{{ $item->ukuran }}</td>
-                    <td>{{ $item->bahan }}</td>
-                    <td>{{ $item->judul }}</td>
-                    <td>{{ $item->tahunpembuatan }}</td>
-                    <td>{{ $item->brg }}</td>
+                    <td>{{ $item->kodebarang }}</td>
+                    <td>{{ $item->koderegister }}</td>
+                    <td>{{ $item->kondisi }}</td>
+                    <td>{{ $item->bertingkat }}</td>
+                    <td>{{ $item->beton }}</td>
+                    <td>{{ $item->luaslantai }}</td>
+                    <td>{{ $item->alamat }}</td>
+                    <td>{{ $item->tgldok }}</td>
+                    <td>{{ $item->nodokumen }}</td>
+                    <td>{{ $item->luas }}</td>
+                    <td>{{ $item->statustanah }}</td>
+                    <td>{{ $item->kodekibtanah }}</td>
+                    <td>{{ $item->tahunperolehan }}</td>
+                    <td>{{ $item->asalusul }}</td>
+                    <td>{{ $item->klasifikasi }}</td>
                     <td>{{ number_format($item->nilaiakumulasibarang) }}</td>
-                    <td>{{ $item->kondisib }}</td>
-                    <td>{{ $item->kondisikb }}</td>
-                    <td>{{ $item->kondisirb }}</td>
+                    <td>{{ $item->deskripsibarang }}</td>
                     <td>{{ $item->keterangan }}</td>
-                    <td>{{ $item->kodekib }}</td>
+                    <td><img src="data:image/png;base64, {!! base64_encode(QrCode::size(50)->generate($item->qrcode)) !!} "></td>
                 </tr>
                 @php
                     $totalNilaiAkumulasiBarang += $item->nilaiakumulasibarang;
@@ -186,14 +172,16 @@
         </tbody>
         <tfoot>
             <tr>
-            <tr>
-                <td colspan="13"><strong>Total</strong></td>
+                <td colspan="19"><strong>Total</strong></td>
                 <td><strong>{{ number_format($totalNilaiAkumulasiBarang) }}</strong></td>
-                <td colspan="5"></td>
-            </tr>
+                <td colspan="3"></td>
             </tr>
         </tfoot>
     </table>
+
+    <div class="footer">
+        <div class="page-number"></div>
+    </div>
 </body>
 
 </html>

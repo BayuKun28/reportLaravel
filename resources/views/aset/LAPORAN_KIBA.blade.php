@@ -7,11 +7,35 @@
     <title>KARTU INVENTARIS BARANG (KIB) A
     </title>
     <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        @page {
+            margin: 50px 25px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: -25px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            text-align: right;
+            font-size: 10px;
+            color: #555;
+        }
+
+        .footer .page-number:after {
+            content: "Page " counter(page);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 10px;
             font-size: 10px;
+            table-layout: fixed;
         }
 
         th,
@@ -19,13 +43,14 @@
             border: 1px solid #dddddd;
             text-align: center;
             padding: 4px;
+            word-wrap: break-word;
+            word-break: break-all;
         }
 
         th {
             background-color: #f2f2f2;
         }
 
-        /* Add a class to exclude specific table styles */
         .no-border {
             border: none;
         }
@@ -82,7 +107,7 @@
     <table>
         <thead>
             <tr>
-                <th rowspan="3">No</th>
+                <th rowspan="3" style="width: 3%">No</th>
                 <th rowspan="3">Kode OPD</th>
                 <th rowspan="3">Nama OPD</th>
                 <th rowspan="3">Jenis Barang/ Nama Barang</th>
@@ -118,7 +143,7 @@
                 <tr>
                     <td>{{ $i++ }}</td>
                     <td>{{ $item->kodeopd }}</td>
-                    <td>{{ $item->uraiorganisasi }}</td>
+                    <td style="text-align: left;">{{ $item->uraiorganisasi }}</td>
                     <td>{{ $item->uraibarang }}</td>
                     <td>{{ $item->kodebarang }}</td>
                     <td>{{ $item->koderegister }}</td>
