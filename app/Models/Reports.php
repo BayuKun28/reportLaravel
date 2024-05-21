@@ -605,4 +605,74 @@ class Reports extends Model
     {
         return self::header($request);
     }
+    public static function LAPORAN_KIBF($request)
+    {
+        $requiredParams = ['kodeklasifikasi', 'tahun', 'kodegolongan', 'kodeopd'];
+        foreach ($requiredParams as $param) {
+            if (empty($request[$param])) {
+                echo "Error: Parameter '{$param}' tidak boleh kosong.";
+                die();
+            }
+        }
+        $kodeklasifikasi = $request['kodeklasifikasi'];
+        $tahun = $request['tahun'];
+        $kodegolongan = $request['kodegolongan'];
+        $kodeopd = $request['kodeopd'];
+        $kodeopdArray = array_filter(explode('.', $kodeopd));
+        $kodeklasifikasiArray = array_filter(explode('.', $kodeklasifikasi));
+
+        if (count($kodeklasifikasiArray) > 1) {
+            $sFilterKlasifikasi = ' and kodeklasifikasi = ' . $kodeklasifikasiArray[0] . ' and kodeklasifikasi_u = ' . $kodeklasifikasiArray[1] . ' and ';
+        } else if ($kodeklasifikasi == 0) {
+            $sFilterKlasifikasi = ' and ';
+        } else {
+            $sFilterKlasifikasi = ' and kodeklasifikasi = ' . $kodeklasifikasi . '  and ';
+        }
+
+
+        if ($kodeopd = '0') {
+            $sFilter = '';
+        } else if ((!empty($kodeopdArray[2])) and (empty($kodeopdArray[3]))) {
+            $sFilter = ' and kodeurusan = ' . $kodeopdArray[0] . ' and kodesuburusan = ' . $kodeopdArray[1] . ' and kodeorganisasi = ' . $kodeopdArray[2] . '';
+        } else if ((!empty($kodeopdArray[3])) and (empty($kodeopdArray[4]))) {
+            $sFilter = ' and kodeurusan = ' . $kodeopdArray[0] . ' and kodesuburusan = ' . $kodeopdArray[1] . ' and kodeorganisasi = ' . $kodeopdArray[2] . ' and  kodeunit = ' . $kodeopdArray[3] . '';
+        } else {
+            $sFilter = ' and kodeurusan = ' . $kodeopdArray[0] . ' and kodesuburusan = ' . $kodeopdArray[1] . ' and kodeorganisasi = ' . $kodeopdArray[2] . ' and  kodeunit = ' . $kodeopdArray[3] . ' and kodesubunit = ' . $kodeopdArray[4] . '';
+        }
+
+
+        $query = " SELECT qrcode,kodeurusan||'.'||kodesuburusan||'.'||kodesuburusan||'.'||kodeorganisasi||'.'||kodeunit||'.'||kodesubunit||'.' as kodeopd, uraiorganisasi, 
+                        format_kodebarang_108(k.kodegolongan, k.kodebidang, k.kodekelompok, k.kodesub, k.kodesubsub) as kodebarang,                                              
+                            k.uraibarang, koderegister,k.bertingkat, k.beton, k.luas, k.alamat, k.tgldok, k.nodokumen, k.tglmulai,                          
+                            ms.statustanah, ma.asalusul, nolokasi_kib(k.kodekibtanah) as nolokasitanah,tahunperolehan,mj.jenisbangunan,mk.kondisi,                          
+                            case when kodeklasifikasi = 1 and kodeklasifikasi_u = 1 then 'Intra Komptabel'         
+                                when kodeklasifikasi = 2 then 'Ekstra Komptabel'   
+                                when kodeklasifikasi = 3 and kodeklasifikasi_u = 1 then 'Aset Lainnya (Intra)'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                when kodeklasifikasi = 3 and kodeklasifikasi_u = 2 then 'Aset Lainnya (Ekstra)'   
+                            else ''                                
+                            end as klasifikasi, nilaiakumulasibarang, deskripsibarang, keterangan                                                       
+                    from kib k 
+                    left join masterhak h on k.kodehak = h.kodehak 
+                    left join masterasalusul ma on k.kodeasalusul = ma.kodeasalusul 
+                    left join masterkondisi mk on mk.kodekondisi = k.kodekondisi 
+                    left join masterjenisbangunan mj on mj.kodejenisbangunan = k.kodejenisbangunan                          
+                    left join masterstatustanah ms on ms.kodestatustanah = k.kodestatustanah 
+                    where tahunorganisasi = $tahun
+                            $sFilterKlasifikasi
+                            statusdata = 'aktif' and
+                            kodegolongan = $kodegolongan
+                            $sFilter
+                    ";
+        try {
+            $result = DB::select($query);
+            return $result;
+        } catch (\Exception $e) {
+            echo "Cek Penulisan Parameter! ";
+            die();
+        }
+    }
+    public static function LAPORAN_KIBF_HEADER($request)
+    {
+        return self::header($request);
+    }
 }
