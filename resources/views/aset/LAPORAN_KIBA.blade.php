@@ -176,8 +176,9 @@
             </tr>
         </tfoot>
     </table>
-
-
+    <div class="footer">
+        <div class="page-number"></div>
+    </div>
 </body>
 
 </html>

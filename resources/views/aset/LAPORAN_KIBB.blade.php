@@ -7,6 +7,29 @@
     <title>KARTU INVENTARIS BARANG (KIB) B
     </title>
     <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        @page {
+            margin: 50px 25px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: -25px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            text-align: right;
+            font-size: 10px;
+            color: #555;
+        }
+
+        .footer .page-number:after {
+            content: "Page " counter(page);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -28,7 +51,6 @@
             background-color: #f2f2f2;
         }
 
-        /* Add a class to exclude specific table styles */
         .no-border {
             border: none;
         }
@@ -157,8 +179,9 @@
             </tr>
         </tfoot>
     </table>
-
-
+    <div class="footer">
+        <div class="page-number"></div>
+    </div>
 </body>
 
 </html>
