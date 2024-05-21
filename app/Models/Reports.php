@@ -21,7 +21,7 @@ class Reports extends Model
         $requiredParams = ['kodeklasifikasi', 'kodeopd', 'tahun'];
         foreach ($requiredParams as $param) {
             if (empty($request[$param])) {
-                var_dump("Error: Parameter '{$param}' tidak boleh kosong.");
+                echo "Error: Parameter '{$param}' tidak boleh kosong.";
                 die();
             }
         }
@@ -55,7 +55,7 @@ class Reports extends Model
                 return $result;
             }
         } catch (\Exception $e) {
-            var_dump("Cek Penulisan Parameter! ");
+            echo "Cek Penulisan Parameter! ";
             die();
         }
     }
@@ -66,7 +66,7 @@ class Reports extends Model
         $requiredParams = ['kodeklasifikasi', 'kodeopd', 'tahun'];
         foreach ($requiredParams as $param) {
             if (empty($request[$param])) {
-                var_dump("Error: Parameter '{$param}' tidak boleh kosong.");
+                echo "Error: Parameter '{$param}' tidak boleh kosong.";
                 die();
             }
         }
@@ -99,7 +99,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            var_dump("Cek Penulisan Parameter! ");
+            echo "Cek Penulisan Parameter! ";
             die();
         }
     }
@@ -112,7 +112,7 @@ class Reports extends Model
         $requiredParams = ['kodeklasifikasi', 'kodeopd', 'tahun'];
         foreach ($requiredParams as $param) {
             if (empty($request[$param])) {
-                var_dump("Error: Parameter '{$param}' tidak boleh kosong.");
+                echo "Error: Parameter '{$param}' tidak boleh kosong.";
                 die();
             }
         }
@@ -161,7 +161,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            var_dump("Cek Penulisan Parameter! ");
+            echo "Cek Penulisan Parameter! ";
             die();
         }
     }
@@ -174,7 +174,7 @@ class Reports extends Model
         $requiredParams = ['kodeklasifikasi', 'tahun', 'koderuang', 'kodeopd'];
         foreach ($requiredParams as $param) {
             if (empty($request[$param])) {
-                var_dump("Error: Parameter '{$param}' tidak boleh kosong.");
+                echo "Error: Parameter '{$param}' tidak boleh kosong.";
                 die();
             }
         }
@@ -232,7 +232,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            var_dump("Cek Penulisan Parameter! ");
+            echo "Cek Penulisan Parameter! ";
             die();
         }
     }
@@ -245,7 +245,7 @@ class Reports extends Model
         $requiredParams = ['kodeklasifikasi', 'tahun', 'kodegolongan', 'kodeopd'];
         foreach ($requiredParams as $param) {
             if (empty($request[$param])) {
-                var_dump("Error: Parameter '{$param}' tidak boleh kosong.");
+                echo "Error: Parameter '{$param}' tidak boleh kosong.";
                 die();
             }
         }
@@ -300,7 +300,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            var_dump("Cek Penulisan Parameter! ");
+            echo "Cek Penulisan Parameter! ";
             die();
         }
     }
@@ -313,7 +313,7 @@ class Reports extends Model
         $requiredParams = ['kodeklasifikasi', 'tahun', 'kodegolongan', 'kodeopd'];
         foreach ($requiredParams as $param) {
             if (empty($request[$param])) {
-                var_dump("Error: Parameter '{$param}' tidak boleh kosong.");
+                echo "Error: Parameter '{$param}' tidak boleh kosong.";
                 die();
             }
         }
@@ -368,7 +368,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            var_dump("Cek Penulisan Parameter! ");
+            echo "Cek Penulisan Parameter! ";
             die();
         }
     }
@@ -381,7 +381,7 @@ class Reports extends Model
         $requiredParams = ['kodeklasifikasi', 'tahun', 'kodegolongan', 'kodeopd'];
         foreach ($requiredParams as $param) {
             if (empty($request[$param])) {
-                var_dump("Error: Parameter '{$param}' tidak boleh kosong.");
+                echo "Error: Parameter '{$param}' tidak boleh kosong.";
                 die();
             }
         }
@@ -437,7 +437,7 @@ class Reports extends Model
             $result = DB::select($query);
             return $result;
         } catch (\Exception $e) {
-            var_dump("Cek Penulisan Parameter! ");
+            echo "Cek Penulisan Parameter! ";
             die();
         }
     }

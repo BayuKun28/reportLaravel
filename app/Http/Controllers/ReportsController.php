@@ -14,6 +14,12 @@ class ReportsController extends Controller
         $filename = $request->get('file');
         $header = $filename . '_HEADER';
 
+        if (method_exists(Reports::class, $filename)) {
+            $data['data'] = Reports::$filename($request->all());
+        } else {
+            echo "Laporan Dengan Nama " . $filename . " Tidak Tersedia";
+            die();
+        }
         $data['data'] = Reports::$filename($request->all());
         $data['tahun'] = $request->get('tahun');
 
