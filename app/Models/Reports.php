@@ -675,4 +675,67 @@ class Reports extends Model
     {
         return self::header($request);
     }
+    public static function LAPORAN_PENGADAAN_BARANG($request)
+    {
+        $requiredParams = ['kodeklasifikasi', 'tahun', 'kodeopd'];
+        foreach ($requiredParams as $param) {
+            if (empty($request[$param])) {
+                echo "Error: Parameter '{$param}' tidak boleh kosong.";
+                die();
+            }
+        }
+        $kodeklasifikasi = $request['kodeklasifikasi'];
+        $tahun = $request['tahun'];
+        $kodeopd = $request['kodeopd'];
+        $kodeopdArray = array_filter(explode('.', $kodeopd));
+        $kodeklasifikasiArray = array_filter(explode('.', $kodeklasifikasi));
+
+        if (count($kodeklasifikasiArray) > 1) {
+            $sFilterKlasifikasi = ' and k.kodeklasifikasi = ' . $kodeklasifikasiArray[0] . ' and k.kodeklasifikasi_u = ' . $kodeklasifikasiArray[1] . ' ';
+        } else if ($kodeklasifikasi == 0) {
+            $sFilterKlasifikasi = ' ';
+        } else {
+            $sFilterKlasifikasi = ' and k.kodeklasifikasi = ' . $kodeklasifikasi . ' ';
+        }
+
+
+        if ((!empty($kodeopdArray[1])) and (empty($kodeopdArray[2]))) {
+            $sFilter = '';
+        } else if ((!empty($kodeopdArray[2])) and (empty($kodeopdArray[3]))) {
+            $sFilter = ' and k.kodeurusan = ' . $kodeopdArray[0] . ' and k.kodesuburusan = ' . $kodeopdArray[1] . ' and k.kodeorganisasi = ' . $kodeopdArray[2] . '';
+        } else if ((!empty($kodeopdArray[3])) and (empty($kodeopdArray[4]))) {
+            $sFilter = ' and k.kodeurusan = ' . $kodeopdArray[0] . ' and k.kodesuburusan = ' . $kodeopdArray[1] . ' and k.kodeorganisasi = ' . $kodeopdArray[2] . ' and  k.kodeunit = ' . $kodeopdArray[3] . '';
+        } else {
+            $sFilter = ' and k.kodeurusan = ' . $kodeopdArray[0] . ' and k.kodesuburusan = ' . $kodeopdArray[1] . ' and k.kodeorganisasi = ' . $kodeopdArray[2] . ' and  k.kodeunit = ' . $kodeopdArray[3] . ' and k.kodesubunit = ' . $kodeopdArray[4] . '';
+        }
+
+        $query = "SELECT cast(k.kodegolongan as text)||'.'||lpad(cast(k.kodebidang as text),2,'0')||'.'||lpad(cast(k.kodekelompok as text),2,'0')||'.'||lpad(cast(k.kodesub as text),2,'0')||'.'||lpad(cast(k.kodesubsub as text),4,'0') as kodebarang,        
+                            k.uraibarang,b.nokontrak, b.tanggalkontrak,b.nama_penyedia, b.npwp, b.tanggalkuitansi, 
+                            b.nokuitansi, sum(ka.nilai) as nilaiakumulasibarang, 
+                            case when kt.kodejenistransaksi =  '104' then 'Peningkatan Nilai' else 'Perolehan' end as transaksi, 
+                            case when kt.kodejenistransaksi =  '104' then 0 else 1 end as ord                          
+                    from kib k 
+                    join kibapbd ka on k.kodekib = ka.kodekib 
+                    join kibtransaksi kt on ka.kodekibtransaksi = kt.kodekibtransaksi        
+                    join bap b on b.kodebap = kt.kodebap 
+                    where k.tahunorganisasi = $tahun and 
+                        statusdata = 'aktif'                                                   
+                        $sFilter
+                        $sFilterKlasifikasi                           
+                    group by ka.kodekib,kt.kodejenistransaksi, b.tanggalkontrak, b.nokontrak, b.nama_penyedia, b.npwp, b.tanggalkuitansi, b.nokuitansi,        
+                            k.kodegolongan, k.kodebidang,k.kodekelompok,k.kodesub,k.kodesubsub, k.uraibarang 
+                    order by ka.kodekib, ord desc
+                    ";
+        try {
+            $result = DB::select($query);
+            return $result;
+        } catch (\Exception $e) {
+            echo "Cek Penulisan Parameter! ";
+            die();
+        }
+    }
+    public static function LAPORAN_PENGADAAN_BARANG_HEADER($request)
+    {
+        return self::header($request);
+    }
 }
