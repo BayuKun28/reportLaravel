@@ -114,7 +114,7 @@
                 <th colspan="3">JUMLAH</th>
             </tr>
             <tr>
-                <th>No Urut</th>
+                <th style="width: 3%">No Urut</th>
                 <th>Kode Barang</th>
                 <th>Register</th>
                 <th>Jenis Barang / Nama Barang</th>
