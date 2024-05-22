@@ -106,7 +106,7 @@
         </thead>
         <tbody>
             @php
-                $i = 1;
+                $i = $counter;
                 $totalNilaiAkumulasiBarang = 0;
             @endphp
             @foreach ($data as $item)

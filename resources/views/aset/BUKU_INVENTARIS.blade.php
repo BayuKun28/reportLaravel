@@ -133,7 +133,7 @@
         </thead>
         <tbody>
             @php
-                $i = 1;
+                $i = $counter;
                 $totalJumlahBarang = 0;
                 $totalHarga = 0;
             @endphp

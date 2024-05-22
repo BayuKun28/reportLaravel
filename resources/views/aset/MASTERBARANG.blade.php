@@ -34,22 +34,13 @@
             border-collapse: collapse;
             margin-bottom: 10px;
             font-size: 10px;
-            table-layout: fixed;
         }
 
-        th {
-            border: 1px solid #dddddd;
-            text-align: center;
-            padding: 4px;
-        }
-
+        th,
         td {
             border: 1px solid #dddddd;
             text-align: center;
-            vertical-align: top;
             padding: 4px;
-            word-wrap: break-word;
-            word-break: break-all;
         }
 
         th {
@@ -86,25 +77,25 @@
     <table>
         <thead>
             <tr>
-                <th rowspan="2" style="width: 3%">No</th>
-                <th rowspan="2">Akun</th>
-                <th rowspan="2">Kelompok</th>
-                <th rowspan="2">Jenis</th>
-                <th rowspan="2">Objek</th>
-                <th rowspan="2">Rincian Objek</th>
-                <th rowspan="2">Rincian Sub Objek</th>
-                <th rowspan="2">Sub Sub Rincian</th>
-                <th rowspan="2">Gabungan Kode</th>
-                <th rowspan="2">Barang</th>
+                <th>No Urut</th>
+                <th>Akun</th>
+                <th>Kelompok</th>
+                <th>Jenis</th>
+                <th>Objek</th>
+                <th>Rincian Objek</th>
+                <th>Rincian Sub Objek</th>
+                <th>Sub Sub Rincian</th>
+                <th>Gabungan Kode</th>
+                <th>Barang</th>
             </tr>
         </thead>
         <tbody>
             @php
-                $i = 1;
+                $i = $counter;
             @endphp
             @foreach ($data as $item)
                 <tr>
-                    <td>{{ $i++ }}</td>
+                    <td>{{ number_format($i++) }}</td>
                     <td>{{ $item->akun }}</td>
                     <td>{{ $item->kelompok }}</td>
                     <td>{{ $item->jenis }}</td>
@@ -113,6 +104,7 @@
                     <td>{{ $item->kodesub }}</td>
                     <td>{{ $item->kodesubsub }}</td>
                     <td>{{ $item->transformkodebarang }}</td>
+                    <td style="text-align: left">{{ $item->urai }}</td>
                 </tr>
             @endforeach
         </tbody>

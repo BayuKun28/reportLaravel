@@ -142,7 +142,7 @@
         </thead>
         <tbody>
             @php
-                $i = 1;
+                $i = $counter;
                 $totalNilaiAkumulasiBarang = 0;
             @endphp
             @foreach ($data as $item)
@@ -164,8 +164,11 @@
                     <td>{{ number_format($item->nilaiakumulasibarang) }}</td>
                     <td>{{ $item->deskripsibarang }}</td>
                     <td>{{ $item->keterangan }}</td>
-                    {{-- <td>{!! $item->qrcode !!}</td> --}}
-                    <td><img src="data:image/png;base64, {!! base64_encode(QrCode::size(50)->generate($item->qrcode)) !!} "></td>
+                    @if ($type === 'pdf')
+                        return <td><img src="data:image/png;base64, {!! base64_encode(QrCode::size(50)->generate($item->qrcode)) !!} "></td>
+                    @else
+                        return <td>{{ $item->qrcode }}</td>
+                    @endif
                 </tr>
                 @php
                     $totalNilaiAkumulasiBarang += $item->nilaiakumulasibarang;
@@ -177,7 +180,7 @@
             <tr>
                 <td colspan="14"><strong>Total</strong></td>
                 <td><strong>{{ number_format($totalNilaiAkumulasiBarang) }}</strong></td>
-                <td colspan="3"></td>
+                <td colspan="2"></td>
             </tr>
             </tr>
         </tfoot>

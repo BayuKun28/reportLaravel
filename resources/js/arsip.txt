@@ -1,0 +1,92 @@
+    // public function index(Request $request)
+    // {
+    //     $filename = $request->get('file');
+    //     $header = $filename . '_HEADER';
+    //     // Get Model Header
+    //     if (method_exists(Reports::class, $header)) {
+    //         $data['judul'] = Reports::$header($request->all());
+    //     } else {
+    //         $data['judul'] = null;
+    //     }
+    //     // Get Model Data
+    //     if (method_exists(Reports::class, $filename)) {
+    //         $data['data'] = Reports::$filename($request->all());
+    //     } else {
+    //         echo "Laporan Dengan Nama " . $filename . " Tidak Tersedia";
+    //         die();
+    //     }
+    //     // $data['data'] = Reports::$filename($request->all());
+    //     $data['tahun'] = $request->get('tahun');
+    //     $pdf = PDF::loadView('aset.' . $filename, $data)
+    //         ->setPaper('a4', 'landscape');
+
+    //     return $pdf->stream();
+    // }
+
+    // public function index(Request $request)
+    // {
+    //     set_time_limit(0);
+
+    //     $filename = $request->get('file');
+    //     $header = $filename . '_HEADER';
+    //     $data['tahun'] = $request->get('tahun');
+
+    //     if (method_exists(Reports::class, $header)) {
+    //         $data['judul'] = Reports::$header($request->all());
+    //     } else {
+    //         $data['judul'] = null;
+    //     }
+
+    //     if (method_exists(Reports::class, $filename)) {
+    //         $reportData = Reports::$filename($request->all());
+    //     } else {
+    //         return response("Laporan Dengan Nama " . $filename . " Tidak Tersedia", 404);
+    //     }
+
+    //     $chunks = array_chunk($reportData, 100);
+    //     $pdfFiles = [];
+    //     $options = [
+    //         'isRemoteEnabled' => true,
+    //     ];
+
+    //     $counter = 1; // Initialize counter
+
+    //     foreach ($chunks as $index => $chunk) {
+    //         $data['data'] = $chunk;
+    //         $data['counter'] = $counter; // Pass the counter to the view
+    //         $data['pageNumber'] = $index + 1;
+
+    //         $html = view('aset.' . $filename, $data)->render();
+
+    //         $pdf = Pdf::loadHTML($html)
+    //             ->setPaper('a4', 'landscape');
+
+    //         $tempFilePath = storage_path("app/temp_chunk_{$index}.pdf");
+    //         $pdf->save($tempFilePath);
+    //         $pdfFiles[] = $tempFilePath;
+
+    //         $counter += count($chunk); // Update counter
+    //     }
+
+    //     $mergedPdf = new Fpdi();
+    //     foreach ($pdfFiles as $file) {
+    //         $pageCount = $mergedPdf->setSourceFile($file);
+    //         for ($i = 1; $i <= $pageCount; $i++) {
+    //             $tplIdx = $mergedPdf->importPage($i);
+    //             $mergedPdf->AddPage('L');
+    //             $mergedPdf->useTemplate($tplIdx);
+    //         }
+    //     }
+
+    //     $mergedPdfPath = storage_path('app/merged_report.pdf');
+    //     $mergedPdf->Output($mergedPdfPath, 'F');
+
+    //     foreach ($pdfFiles as $file) {
+    //         unlink($file);
+    //     }
+
+    //     return response()->file($mergedPdfPath, [
+    //         'Content-Type' => 'application/pdf',
+    //         'Content-Disposition' => 'inline; filename="merged_report.pdf"',
+    //     ]);
+    // }
