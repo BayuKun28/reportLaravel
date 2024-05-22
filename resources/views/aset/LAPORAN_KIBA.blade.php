@@ -38,7 +38,12 @@
             table-layout: fixed;
         }
 
-        th,
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 4px;
+        }
+
         td {
             border: 1px solid #dddddd;
             text-align: center;

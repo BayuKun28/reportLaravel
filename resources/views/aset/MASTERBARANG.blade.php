@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAFTAR PENYUSUTAN</title>
+    <title>MASTER BARANG</title>
     <style>
         body {
             font-family: sans-serif;
@@ -81,58 +81,41 @@
 
 <body>
     <center>
-        <h3>DAFTAR PENYUSUTAN</h3>
-        <h4>TAHUN ANGGARAN {{ $tahun }}</h4>
+        <h3>MASTER BARANG</h3>
     </center>
-    <table class="no-border">
-        <tr>
-            <td>SKPD</td>
-            <td>:</td>
-            <td>{{ $judul[0]->organisasi }}</td>
-        </tr>
-        <tr>
-            <td>Kabupaten</td>
-            <td>:</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Provinsi</td>
-            <td>:</td>
-            <td>Papua Barat Daya</td>
-        </tr>
-        <tr>
-            <td>Klasifikasi</td>
-            <td>:</td>
-            <td>{{ $judul[0]->klasifikasi }}</td>
-        </tr>
-    </table>
     <table>
         <thead>
             <tr>
-                <th>Nomor</th>
-                <th>Jenis Barang</th>
-                <th>Tahun Perolehan</th>
-                <th>Harga Perolehan (Rp.)</th>
-                <th>Harga Perolehan Baru (Rp.)</th>
-                <th>Masa Manfaat( Kebijakan Akuntansi No.43 thn 2013)</th>
-                <th>Penyusutan Per Tahun (Rp.)</th>
-                <th>Tahun Berakhirnya Penyusutan</th>
-                <th>Masa Manfaat yang telah dilalui s/d 31 Des [xtahun]</th>
-                <th>Akumulasi Penyusutan s/d Tahun [<xtahun>-1] (Rp)</th>
-                <th>Beban Penyusutan Tahun [xtahun] (Rp)</th>
-                <th>Akumulasi Penyusutan s/d Tahun [xtahun] (Rp)</th>
-                <th>Nilai Buku (Rp)</th>
-                <th>Transaksi</th>
+                <th rowspan="2" style="width: 3%">No</th>
+                <th rowspan="2">Akun</th>
+                <th rowspan="2">Kelompok</th>
+                <th rowspan="2">Jenis</th>
+                <th rowspan="2">Objek</th>
+                <th rowspan="2">Rincian Objek</th>
+                <th rowspan="2">Rincian Sub Objek</th>
+                <th rowspan="2">Sub Sub Rincian</th>
+                <th rowspan="2">Gabungan Kode</th>
+                <th rowspan="2">Barang</th>
             </tr>
         </thead>
         <tbody>
-
+            @php
+                $i = 1;
+            @endphp
+            @foreach ($data as $item)
+                <tr>
+                    <td>{{ $i++ }}</td>
+                    <td>{{ $item->akun }}</td>
+                    <td>{{ $item->kelompok }}</td>
+                    <td>{{ $item->jenis }}</td>
+                    <td>{{ $item->kodebidang }}</td>
+                    <td>{{ $item->kodekelompok }}</td>
+                    <td>{{ $item->kodesub }}</td>
+                    <td>{{ $item->kodesubsub }}</td>
+                    <td>{{ $item->transformkodebarang }}</td>
+                </tr>
+            @endforeach
         </tbody>
-        <tfoot>
-            <tr>
-
-            </tr>
-        </tfoot>
     </table>
     <div class="footer">
         <div class="page-number"></div>

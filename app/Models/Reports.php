@@ -734,8 +734,29 @@ class Reports extends Model
             die();
         }
     }
-    public static function LAPORAN_PENGADAAN_BARANG_HEADER($request)
+    public static function MASTERBARANG($request)
     {
-        return self::header($request);
+        $query = "SELECT * ,  
+                    cast((regexp_split_to_array(cast(kodegolongan as text),''))[1] as integer) as akun,
+                    cast((regexp_split_to_array(cast(kodegolongan as text),''))[2] as integer) as kelompok,
+                    cast((regexp_split_to_array(cast(kodegolongan as text),''))[3] as integer) as jenis,
+                    lpad((regexp_split_to_array(cast(kodegolongan as text),''))[1],2,'0')||'.'||
+                    lpad((regexp_split_to_array(cast(kodegolongan as text),''))[2],2,'0')||'.'||
+                    lpad((regexp_split_to_array(cast(kodegolongan as text),''))[3],2,'0')||'.'||
+                    lpad(cast(kodebidang as text),2,'0')||'.'||
+                    lpad(cast(kodekelompok as text),2,'0')||'.'||
+                    lpad(cast(kodesub as text),2,'0')||'.'||
+                    lpad(cast(kodesubsub as text),3,'0') as transformkodebarang
+                    from masterbarang
+                    order by kodegolongan, kodebidang, 
+                            kodekelompok, kodesub, kodesubsub   
+                    ";
+        try {
+            $result = DB::select($query);
+            return $result;
+        } catch (\Exception $e) {
+            echo "Cek Penulisan Parameter! atau </br>" . $e->getMessage();
+            die();
+        }
     }
 }
