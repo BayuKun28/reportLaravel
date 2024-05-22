@@ -24,7 +24,7 @@ Route::get('/', function () {
 // Route::get('/reportExcel', [ReportsController::class, 'ExportExcel']);
 
 Route::get('/report', function (Request $request) {
-    $type = $request->get('type');
+    $type = strtolower($request->get('type'));
     $controller = app(ReportsController::class);
     if ($type === 'pdf') {
         return $controller->index($request);

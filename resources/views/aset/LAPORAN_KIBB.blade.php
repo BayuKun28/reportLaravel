@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KARTU INVENTARIS BARANG (KIB) B
-    </title>
+    <title>KARTU INVENTARIS BARANG (KIB) B</title>
     <style>
         body {
             font-family: sans-serif;
@@ -82,10 +81,8 @@
 
 <body>
     <center>
-        <h3>KARTU INVENTARIS BARANG (KIB) B
-        </h3>
-        <h3>PERALATAN DAN MESIN
-        </h3>
+        <h3>KARTU INVENTARIS BARANG (KIB) B</h3>
+        <h3>PERALATAN DAN MESIN</h3>
         <h4>TAHUN ANGGARAN {{ $tahun }}</h4>
     </center>
     <table class="no-border">
@@ -181,11 +178,9 @@
         </tbody>
         <tfoot>
             <tr>
-            <tr>
                 <td colspan="16"><strong>Total</strong></td>
                 <td><strong>{{ number_format($totalNilaiAkumulasiBarang) }}</strong></td>
                 <td colspan="5"></td>
-            </tr>
             </tr>
         </tfoot>
     </table>

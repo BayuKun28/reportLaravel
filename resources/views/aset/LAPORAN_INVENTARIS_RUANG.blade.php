@@ -192,11 +192,9 @@
         </tbody>
         <tfoot>
             <tr>
-            <tr>
                 <td colspan="13"><strong>Total</strong></td>
                 <td><strong>{{ number_format($totalNilaiAkumulasiBarang) }}</strong></td>
                 <td colspan="5"></td>
-            </tr>
             </tr>
         </tfoot>
     </table>
